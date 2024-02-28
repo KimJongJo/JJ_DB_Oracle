@@ -222,9 +222,9 @@ WHERE EMAIL LIKE '____';
 -- 문제점 : _를 기준점으로 삼았으나, 패턴 중 '_'와 동일한 표기법으로 작성되어
 --         구분되지 않음
 
--- 해결 방법 : LIKE의 EXCAPE OPTION 을 이용하여 _를 구분한다
+-- 해결 방법 : LIKE의 ESCAPE OPTION 을 이용하여 _를 구분한다
 
--- LIKE의 EXCAPE OPTION : 일반 문자로 처리할 '_' / '%' 앞에
+-- LIKE의 ESCAPE OPTION : 일반 문자로 처리할 '_' / '%' 앞에
 -- 												아무 특수기호나 첨부해서 구분하게 함
 
 SELECT EMP_NAME, EMAIL
