@@ -111,7 +111,7 @@ WHERE STUDENT_NO = 'A517178';
 --10. 학과별 학생수를 구하여 "학과번호", "학생수(명)" 의 형태로 헤더를 만들어 결과값이 출력되도록하시오
 
 SELECT DEPARTMENT_NO 학과번호, COUNT(*) "학생수(명)"
-FROM TB_STUDENT ts 
+FROM TB_STUDENT
 GROUP BY DEPARTMENT_NO
 ORDER BY 1;
 
@@ -120,7 +120,7 @@ ORDER BY 1;
 
 --11. 지도 교수를 배정받지 못한 학생의 수는 몇 명 정도 되는지 알아내는 SQL 문을 작성하시오.
 
-SELECT COUNt(*)
+SELECT COUNT(*)
 FROM TB_STUDENT
 WHERE COACH_PROFESSOR_NO IS NULL;
 
