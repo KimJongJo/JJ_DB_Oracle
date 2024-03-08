@@ -841,8 +841,9 @@ FROM EMPLOYEE;
 -- 1. 전지연 사원이 속해있는 부서원들을 조회하시오 (단, 전지연은 제외)
 -- 사번, 사원명, 전화번호, 고용일, 부서명
 
-SELECT EMP_ID, EMP_NAME, PHONE, TO_CHAR(HIRE_DATE, 'YY/MM/DD') "HIRE_DATE"
+SELECT EMP_ID, EMP_NAME, PHONE, TO_CHAR(HIRE_DATE, 'YY/MM/DD') "HIRE_DATE", DEPT_TITLE
 FROM EMPLOYEE
+LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
 WHERE DEPT_CODE = (SELECT DEPT_CODE
 									FROM EMPLOYEE
 									WHERE EMP_NAME = '전지연')
@@ -930,6 +931,13 @@ WHERE HIRE_DATE IN (SELECT MIN(HIRE_DATE)
 									WHERE ENT_YN = 'N'
 									GROUP BY DEPT_CODE)
 ORDER BY E.HIRE_DATE;
+-- 부서별로 그룹을 묶을 때 퇴사한 직원을 서브쿼리에서 제외해야함
+-- 부서별로 가장 빠른 입사자를 구했을때 D8부서는 이태림(퇴사자)이다
+--> 문제점 : 부서별로 가장빠른 입사자를 구해놓고, 메인쿼리에서 퇴사자를 제외해 버리면
+-- D8부서는 퇴사자인 이태림이 가장 빠른 입사자이기 때문에 
+-- 전체 부서중 D8부서가 제외되어 버린다.
+--> 부서별 가장 빠른 입사자를 구할 때(서브쿼리) 퇴사한 직원을 뺀 상태에서 그룹으로 묶으면
+--> D8 부서의 가장 빠른 입사자응 이태림 제외 후 전형돈이 된다.
 
 
 
@@ -941,13 +949,13 @@ ORDER BY E.HIRE_DATE;
 -- 나이순으로 내림차순 정렬하세요
 -- 단 연봉은 \124,800,000 으로 출력되게 하세요. (\ : 원 단위 기호)
 
-SELECT EMP_ID, EMP_NAME, JOB_NAME, FLOOR((SYSDATE - TO_DATE(SUBSTR(EMP_NO,1,6))) / 365) 나이,
-TO_CHAR(NVL2(BONUS,(SALARY * BONUS + SALARY) * 12, SALARY * 12), 'L999,999,000') "보너스포함연봉"
+SELECT EMP_ID, EMP_NAME, JOB_NAME, FLOOR((SYSDATE - TO_DATE(SUBSTR(EMP_NO,1,6),'RRMMDD')) / 365) 나이,
+TO_CHAR(NVL2(BONUS,(SALARY * BONUS + SALARY) * 12, SALARY * 12), 'L999,999,999') "보너스포함연봉"
 FROM EMPLOYEE
 NATURAL JOIN JOB
-WHERE SUBSTR(EMP_NO,1,6) IN (SELECT MAX(SUBSTR(EMP_NO,1,6))
-														FROM EMPLOYEE
-														GROUP BY JOB_CODE)
+WHERE EMP_NO IN (SELECT MAX(EMP_NO)
+								FROM EMPLOYEE
+								GROUP BY JOB_CODE)
 ORDER BY 4 DESC;
 
 
