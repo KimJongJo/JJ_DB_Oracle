@@ -52,7 +52,7 @@ ADD CONSTRAINT DEPT_COPY_TITLE_NN NOT NULL(DEPT_TITLE);
 -- 컬럼 자체의 NULL 허용/비허용을 제어하는 성질 변경의 형태로 인식됨.
 
 
--- MODIFY(수정하다) 구문을 사용해서 NUL 제어
+-- MODIFY(수정하다) 구문을 사용해서 NULL 제어
 ALTER TABLE DEPT_COPY
 MODIFY DEPT_TITLE NOT NULL; -- DEPT_TITLE 컬럼을 NOT NULL로 수정
 
@@ -112,7 +112,7 @@ SELECT * FROM DEPT_COPY;
 -- LNAME의 기본값을 'KOREA'로 수정
 ALTER TABLE DEPT_COPY MODIFY LNAME DEFAULT 'KOREA';
 SELECT * FROM DEPT_COPY;
---> 기본값을 변경했따고 해서 기존 데이터가 변하지는 않음
+--> 기본값을 변경했다고 해서 기존 데이터가 변하지는 않음
 
 
 -- LNAME '한국' -> 'KOREA'로 변경
@@ -133,7 +133,7 @@ ALTER TABLE DEPT_COPY DROP(DEPT_ID);
 -- ORA-12983: 테이블에 모든 열들을 삭제할 수 없습니다
 
 -- 컬럼 삭제 시 유의사항!
--- 테이블이랑 ? 행과 열로 이루어진 DB의 가장 기본적인 객체
+-- 테이블이란 ? 행과 열로 이루어진 DB의 가장 기본적인 객체
 --            테이블에 데이터가 저장됨.
 
 -- 테이블은 최소 1개 이상의 컬럼이 존재해야 되기 때문에
@@ -154,6 +154,8 @@ AS SELECT * FROM DEPARTMENT;
 -- DEPY_COPY 테이블에 PK 추가 (컬럼 : DEPT_ID, 제약조건명 : D_COPY_PK)
 ALTER TABLE DEPT_COPY ADD CONSTRAINT D_COPY_PK PRIMARY KEY(DEPT_ID);
 
+
+------------------------------------------------------------------------------------------
 
 
 -- 3. 이름 변경(컬럼, 테이블, 제약조건명)
