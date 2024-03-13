@@ -123,11 +123,3 @@ INSERT INTO V_DCOPY2 VALUES('D0','L3');
 SELECT * FROM V_DCOPY2;
 
 
-
-
-
-
-
-
-
-

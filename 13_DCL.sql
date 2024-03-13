@@ -162,24 +162,3 @@ REVOKE SELECT ON EMPLOYEE FROM kjj_sample;
 SELECT * FROM kh_kjj.EMPLOYEE;
 -- ORA-00942: 테이블 또는 뷰가 존재하지 않습니다
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

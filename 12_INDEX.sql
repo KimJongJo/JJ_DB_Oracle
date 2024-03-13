@@ -81,17 +81,3 @@ SELECT * FROM TB_INX_TEST
 WHERE TEST_NO = 500000; -- 인덱스 O
 -- 0.003S
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
