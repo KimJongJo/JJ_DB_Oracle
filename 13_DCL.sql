@@ -68,9 +68,13 @@ WHERE ROLE = 'CONNECT';
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 --> 예전 SQL 방식 허용 (계정명을 간단히 작성 가능)
 
+
+
 -- [작성법]
 -- CREATE USER 사용자명 IDENTIFIED BY 비밀번호;
 CREATE USER kjj_sample IDENTIFIED BY sample1234;
+
+
 
 
 -- 2. 새 연결 추가
@@ -114,6 +118,8 @@ CREATE TABLE TB_TEST(
 	PK_COL NUMBER PRIMARY KEY,
 	CONTENT VARCHAR2(100)
 );
+
+
 
 
 -- role : 권한 묶음

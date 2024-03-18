@@ -87,6 +87,7 @@ SELECT * FROM MEMBER;
 
 
 
+
 -- 2. 컬럼에 주석 달기
 -- [표현식]
 -- COMMENT ON COLUMN 테이블명.컬럼명 IS '주성내용';
@@ -246,6 +247,7 @@ SELECT * FROM USER_USED_NN;
 -- * 제약조건 지정 방법
 -- 1) 컬럼 레벨   : [CONSTRAINT 제약조건명] 제약조건
 -- 2) 테이블 레벨 : [CONSTRAINT 제약조건명] 제약조건(컬럼명)
+
 
 
 -- UNIQUE 제약 조건 테이블 생성
@@ -450,6 +452,7 @@ CREATE TABLE USER_USED_FK(
 		GRADE_CODE NUMBER CONSTRAINT GRADE_CODE_FK REFERENCES USER_GRADE /*(GRADE_CODE)*/
 																	-- 컬럼명 미작성 시 USER_GRADE 테이블의 PK를 자동 참조
 		
+		
 		-- 테이블 레벨
 		-- ,CONSTRAINT GRADE_CODE_FK FOREIGN KEY(GRADE_CODE) REFERENCES USER_GRADE
 												--> FOREIGN KEY 라는 단어는 테이블레벨에서만 사용
@@ -534,6 +537,7 @@ CREATE TABLE USER_USED_FK2(
 		EMAIL VARCHAR2(50),
 		GRADE_CODE NUMBER CONSTRAINT GRADE_CODE_FK2 REFERENCES USER_GRADE2 ON DELETE SET NULL
 																																				/* 삭제 옵션 */
+		
 );
 
 
