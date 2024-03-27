@@ -11,15 +11,15 @@ ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 
 
 -- 사용자 계정 생성
-CREATE USER board_project IDENTIFIED BY board1234;
+CREATE USER music_chart IDENTIFIED BY music_chart;
 
 
 -- 사용자 계정에 권한 부여
-GRANT RESOURCE, CONNECT TO board_project;
+GRANT RESOURCE, CONNECT TO music_chart;
 
 
 -- 객체가 생성될 수 있는 공간 할당량 지정
-ALTER USER board_project DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
+ALTER USER music_chart DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 
 
 
