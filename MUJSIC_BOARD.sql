@@ -10,6 +10,8 @@ CREATE TABLE "MUSIC_BOARD"(
 	SONG_DEL CHAR(1) DEFAULT 'N' CHECK(SONG_DEL IN('Y','N'))
 );
 
+
+
 ALTER TABLE "MUSIC_BOARD"
 MODIFY SONG_TITLE VARCHAR2(100)
 MODIFY SONG_SINGER VARCHAR2(100);
@@ -26,7 +28,6 @@ COMMENT ON COLUMN "MUSIC_BOARD".SONG_LIKE IS '노래 좋아요 수';
 COMMENT ON COLUMN "MUSIC_BOARD".SONG_GENRE IS '노래 장르';
 COMMENT ON COLUMN "MUSIC_BOARD".SONG_DEL IS '삭제 여부';
 
-COMMIT;
 
 
 
@@ -40,6 +41,13 @@ CREATE TABLE "PLAYLIST"(
 	LIST_DEL CHAR(1) DEFAULT 'N' CHECK(LIST_DEL IN('Y','N'))
 );
 
+ALTER TABLE "PLAYLIST"
+MODIFY SONG_LYRICS VARCHAR2(3000);
+
+ALTER TABLE "PLAYLIST"
+MODIFY SONG_TITLE VARCHAR2(100)
+MODIFY SONG_SINGER VARCHAR2(100);
+
 
 
 COMMENT ON COLUMN "PLAYLIST".LIST_NO IS '재생목록 번호';
@@ -49,10 +57,6 @@ COMMENT ON COLUMN "PLAYLIST".SONG_LYRICS IS '노래 가사';
 COMMENT ON COLUMN "PLAYLIST".SONG_LIKE_CH IS '좋아요 체크 여부';
 COMMENT ON COLUMN "PLAYLIST".LIST_DEL IS '재생목록 삭제 여부';
 
-COMMIT;
-
-
-DROP SEQUENCE SEQ_SONG_NO;
 
 
 -- SEQUENCE 생성
@@ -253,7 +257,6 @@ Pull up and I rip it up like ballet
 Damn, I really make it look easy
 Yuh know that I make it look easy',60851,'트랩' ,DEFAULT);
 
-SELECT * FROM "MUSIC_BOARD";
 
 
 
@@ -3179,5 +3182,151 @@ Woo woo woo woo',280939,'댄스',DEFAULT);
 
 SELECT * FROM "MUSIC_BOARD"
 ORDER BY SONG_NO;
+
+
+-- 회원 목록
+CREATE TABLE "MEMBER" (
+	MEMBER_NO NUMBER CONSTRAINT MEMBER_PK PRIMARY KEY,
+	MEMBER_ID VARCHAR(20) UNIQUE,
+	MEMBER_PW VARCHAR(20) NOT NULL,
+	MEMBER_NICKNAME VARCHAR(10) NOT NULL,
+	MEMBER_DEL CHAR(1) DEFAULT 'N' CHECK(MEMBER_DEL IN ('Y','N'))
+);
+
+COMMENT ON COLUMN "MEMBER".MEMBER_NO IS '회원 번호';
+COMMENT ON COLUMN "MEMBER".MEMBER_ID IS '회원 아이디';
+COMMENT ON COLUMN "MEMBER".MEMBER_PW IS '회원 비밀번호';
+COMMENT ON COLUMN "MEMBER".MEMBER_NICKNAME IS '회원 이름';
+COMMENT ON COLUMN "MEMBER".MEMBER_DEL IS '탈퇴 여부';
+
+
+CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
+
+
+
+
+-- 테스트 회원 넣기
+INSERT INTO "MEMBER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user01','pass01','유저일',DEFAULT);
+
+INSERT INTO "MEMBER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user02','pass02','유저이',DEFAULT);
+
+-- PLAYLIST테이블에 MEMBER_NO 컬럼 추가
+ALTER TABLE PLAYLIST ADD MEMBER_NO NUMBER;
+
+
+SELECT * FROM "MEMBER";
+SELECT * FROM "PLAYLIST";
+SELECT * FROM "MUSIC_BOARD";
+
+-- PLAYLIST 테이블에 테스트 곡 추가
+INSERT INTO "PLAYLIST"
+VALUES(SEQ_LIST_NO.NEXTVAL, '첫 만남은 계획대로 되지 않아', 'TWS(투어스)',
+'Ay ay ay ay ay
+
+거울 속에 내 표정 봐 봐
+느낌 So good 기다려온 D-day
+연습했던 손든 인사도 그대로 하면 돼
+Hairstyle check하고 한 번 Turn around
+
+발걸음은 매일 걷던 그 길로
+계획은 완벽
+빨리 말 걸어보고 싶어, Hey
+
+Woo 문 앞에서 셋을 세어본다, Yeh
+
+(셋, 둘, 하나)
+
+첫 만남은 너무 어려워
+계획대로 되는 게 없어서
+첫 만남은 너무 어려워
+내 이름은 말야
+
+Hey,
+안녕, 첫 마디를 건넬 때
+주변 소린 Canceled
+네 말소리는 Playlist
+
+Yeh,
+질문은 나의 용기, 알려줘 너의
+“이름이 뭐야?”
+
+너와 내 거리는 세 걸음 남았어, Yeh
+
+(셋, 둘, 하나)
+
+첫 만남은 너무 어려워
+계획대로 되는 게 없어서
+첫 만남은 너무 어려워
+내 이름은 말야
+
+이 순간, Feels so wonderful
+조금은 뚝딱거려도
+어색한 인사까지도
+너와 나의 첫 만남
+
+우리의 사이 Beautiful
+내일도 내일모레도
+기억해, 영원히 반짝일 순간
+
+Wait wait!
+
+Na na na-
+
+이렇게 만나서 반가워
+내일 또 봐 안녕', DEFAULT, DEFAULT, 1);
+
+INSERT INTO "PLAYLIST"
+VALUES(SEQ_LIST_NO.NEXTVAL,'무지개','임영웅',
+'오늘 하루 어땠었나요
+많이 힘들었나요
+쉬지 않고 달려왔던 길에서
+나와 함께 쉬어가요
+그냥 아무런 준비도 없이
+떠나볼까요
+평범해도 좋으니까
+우리 함께 가요
+Du Du Du Du Du
+행복 가득 담은 배낭 하나 메고서
+답답했던 일상과 도심을 벗어나
+Du Du Du Du
+Du Du Du Du
+떠나볼래요
+힘껏 살다 보니 무뎌져
+헝클어진 머리도
+괜찮다며 그댈 안아줄 사람
+바로 그대 곁에 있죠
+까만 선글라스 하나 챙겨서
+떠나볼까요
+평범해도 좋으니까
+우리 함께 가요
+Du Du Du Du Du
+행복 가득 담은 배낭 하나 메고서
+답답했던 일상과 도심을 벗어나
+Du Du Du Du
+Du Du Du Du
+떠나볼래요
+우리 함께 가요
+Du Du Du Du Du
+행복 가득 담은 배낭 하나 메고서
+답답했던 일상과 도심을 벗어나
+Du Du Du Du
+Du Du Du Du
+떠나볼래요
+우리 함께 가요
+Du Du Du Du Du
+Du Du Du Du
+Du Du Du Du
+떠나볼래요
+Du Du Du Du
+Du Du Du Du
+떠나볼래요
+Du Du Du Du
+Du Du Du Du
+지금 떠나요',DEFAULT, DEFAULT, 1);
+
+
+SELECT SEQ_LIST_NO.NEXTVAL FROM DUAL;
 
 COMMIT;
