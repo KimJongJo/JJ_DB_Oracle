@@ -163,3 +163,21 @@ SELECT * FROM "MEMBER";
 
 
 
+-- 샘플 회원 데이터 삽입
+INSERT INTO "MEMBER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL, 
+			 'user02@kh.or.kr',
+			 'pass02!',
+			 '유저이',
+			 '01077770000',
+			 NULL,
+			 NULL,
+			 DEFAULT,
+			 DEFAULT,
+			 DEFAULT
+);
+
+COMMIT;
+
+
+
