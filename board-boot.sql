@@ -18,7 +18,7 @@ ALTER USER spring_kjj DEFAULT TABLESPACE SYSTEM QUOTA UNLIMITED ON SYSTEM;
 -- "" : 내부에 작성된 글(모양) 그대로 인식 -> 대/소문자 구분 
 --> "" 작성 권장
 
-
+TB_AUTH
 -- CHAR(10)      : 고정 길이 문자열 10바이트 (최대 2000 바이트)
 -- VARCHAR2(10)  : 가변 길이 문자열 10바이트 (최대 4000 바이트)
 

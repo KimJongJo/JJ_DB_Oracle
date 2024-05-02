@@ -683,6 +683,23 @@ ROLLBACK;
 
 
 
+--------------------------------------------------
+SELECT * FROM "BOARD_IMG"; -- NVARCHAR2(50)
+SELECT * FROM "MEMBER"; -- VARCHAR2(300)
+-- 둘이 타입이 안맞아서 UNION 안되는걸
+-- 캐스팅으로 해결!
+
+
+
+SELECT CAST(IMG_RENAME AS VARCHAR2(300)) "rename"
+FROM BOARD_IMG
+UNION
+SELECT SUBSTR(PROFILE_IMG, INSTR(PROFILE_IMG, '/', -1) + 1) "rename"
+FROM "MEMBER"
+WHERE PROFILE_IMG IS NOT NULL;
+-- ORA-12704: 문자 집합이 일치하지 않습니다
+
+
 
 
 
